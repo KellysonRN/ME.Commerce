@@ -1,0 +1,62 @@
+# Indica que este é um arquivo raiz para configurações
+root = true
+
+# Define configurações para todos os arquivos
+[*]
+# Indenta usando espaços
+indent_style = space
+# Usa 4 espaços para indentação
+indent_size = 4
+# Finaliza arquivos com uma nova linha
+insert_final_newline = true
+# Remove espaços em branco no final das linhas
+trim_trailing_whitespace = true
+# Usa codificação UTF-8
+charset = utf-8
+
+# Configurações específicas para arquivos C#
+[*.cs]
+# Define a convenção de estilo para aspas
+csharp_prefer_single_line_comments = true
+# Usa nome do tipo implícito 'var' para variáveis locais quando o tipo é óbvio
+csharp_style_var_for_built_in_types = true
+csharp_style_var_when_type_is_apparent = true
+csharp_style_var_elsewhere = false
+# Estilo de chaves
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_catch = true
+csharp_new_line_before_else = true
+csharp_new_line_before_finally = true
+# Parênteses e espaçamento
+csharp_space_before_open_square_brackets = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_empty_method_call_parentheses = false
+csharp_space_between_empty_method_declaration_parentheses = false
+# Preferência por interpolação de strings ao invés de concatenação
+csharp_style_prefer_interpolated_string = true
+# Preferência por expressões lambda
+csharp_style_expression_bodied_methods = when_possible
+csharp_style_expression_bodied_operators = true
+# Convenção de nomes
+dotnet_naming_rule.private_members_should_be_camel_case.severity = suggestion
+dotnet_naming_rule.private_members_should_be_camel_case.symbols = private_members
+dotnet_naming_rule.private_members_should_be_camel_case.style = camel_case_style
+dotnet_naming_symbols.private_members.applicable_kinds = field
+dotnet_naming_symbols.private_members.applicable_accessibilities = private
+dotnet_naming_symbols.private_members.required_modifiers = readonly
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+# Configurações específicas para arquivos JSON
+[*.json]
+# Indenta usando 2 espaços
+indent_size = 2
+
+# Configurações específicas para arquivos XML
+[*.xml]
+# Indenta usando 2 espaços
+indent_size = 2
+
+# Configurações específicas para arquivos Markdown
+[*.md]
+# Remove espaços em branco no final das linhas
+trim_trailing_whitespace = false
