@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
 using FluentAssertions;
 using ME.Commerce.Core.Features.ProductListing.Contracts;
 using ME.Commerce.Core.Features.ProductListing.Models;
 using Moq;
+using Xunit;
 
 namespace ME.Commerce.Tests.ProductCatalog
 {
@@ -11,7 +13,7 @@ namespace ME.Commerce.Tests.ProductCatalog
         public async Task GetProductAsync_ShouldReturnExpectedProduct_WhenCalledWithValidProductId()
         {
             var productId = 1;
-            var expectedProduct = new Product(id: productId, name: "Laptop", price: 1000.0m);
+            var expectedProduct = new Product(Id: productId, Name: "Laptop", Price: 1000.0m);
 
             var mockProductCatalogService = new Mock<IProductCatalogService>();
 
