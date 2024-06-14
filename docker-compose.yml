@@ -1,0 +1,18 @@
+
+version: '3.8'
+
+services:
+  pact-broker:
+    image: pactfoundation/pact-broker
+    container_name: pact-broker
+    ports:
+      - "9292:9292"
+    environment:
+      PACT_BROKER_DATABASE_ADAPTER: "sqlite"
+      PACT_BROKER_DATABASE_NAME: "pacts.sqlite"
+      PACT_BROKER_LOG_LEVEL: "DEBUG"
+    volumes:
+      - pact-broker-data:/var/lib/postgresql/data
+
+volumes:
+  pact-broker-data:
