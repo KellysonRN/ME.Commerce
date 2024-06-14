@@ -24,6 +24,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\src\ME.Commerce.Core\ME.Commerce.Core.csproj" />
         <ProjectReference Include="..\..\src\ME.Commerce.Web\ME.Commerce.Web.csproj" />
+        <ProjectReference Include="..\..\src\ME.Commerce.Infrastructure\ME.Commerce.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

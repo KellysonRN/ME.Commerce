@@ -65,7 +65,7 @@ namespace ME.Commerce.Tests.ProductCatalog
                                            "..",
                                            "ME.Commerce.Tests",
                                            "pacts",
-                                           "me-commerce-product-catalog-api.json");
+                                           "ShoppingCart API-ProductCatalog API.json");
 
             _verifier
                 .WithHttpEndpoint(_providerUri)
