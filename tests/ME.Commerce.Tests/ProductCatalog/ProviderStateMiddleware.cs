@@ -23,24 +23,24 @@ namespace ME.Commerce.Tests.ProductCatalog
 
         private readonly RequestDelegate _next;
 
-        private readonly IProductRepository _productRepository;
+        private readonly IProductCatalogService _productCatalogService;
 
-        public ProviderStateMiddleware(RequestDelegate next, IProductRepository productRepository)
+        public ProviderStateMiddleware(RequestDelegate next, IProductCatalogService productRepository)
         {
             _next = next;
-            _productRepository = productRepository;
+            _productCatalogService = productRepository;
 
             _providerStates = new Dictionary<string, Func<IDictionary<string, object>, Task>>
             {
-                ["an order with ID {id} exists"] = EnsureEventExistsAsync
+                ["There is a product with ID '1'"] = AddProductWithId1
             };
         }
 
-        private async Task EnsureEventExistsAsync(IDictionary<string, object> parameters)
+        private async Task AddProductWithId1(IDictionary<string, object> parameters)
         {
             JsonElement id = (JsonElement)parameters["id"];
 
-            await _productRepository.InsertAsync(new Product(id.GetInt32(), "Laptop", 3000.0m));
+            await _productCatalogService.InsertAsync(new Product(id.GetInt32(), "Laptop", 3000.0m));
         }
 
         public async Task InvokeAsync(HttpContext context)

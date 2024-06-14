@@ -20,13 +20,15 @@ namespace ME.Commerce.Web
         {
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddControllers()
-                    .AddJsonOptions(options =>
-                    {
-                        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
-                        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                    });
+            services
+                .AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.DefaultIgnoreCondition =
+                        JsonIgnoreCondition.WhenWritingDefault;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -34,8 +36,8 @@ namespace ME.Commerce.Web
             });
 
             services.TryAddSingleton<IProductCatalogService, ProductCatalogService>();
-        }
 
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -51,6 +53,24 @@ namespace ME.Commerce.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                endpoints.MapGet(
+                    "api/products/{id:int}",
+                    async (HttpContext context, int id, IProductCatalogService productCatalogService) =>
+                    {
+                        var product = await productCatalogService.GetProductAsync(id);
+
+                        if (product is null)
+                        {
+                            context.Response.StatusCode = StatusCodes.Status404NotFound;
+                            await context.Response.WriteAsync($"Product with ID {id} not found.");
+                            return;
+                        }
+
+                        context.Response.StatusCode = StatusCodes.Status200OK;
+                        await context.Response.WriteAsJsonAsync(product);
+                    }
+                );
             });
         }
     }

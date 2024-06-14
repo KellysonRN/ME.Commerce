@@ -18,7 +18,7 @@ namespace ME.Commerce.Tests.ProductCatalog
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IProductRepository, FakeProductRepository>();
+            services.AddSingleton<IProductCatalogService, FakeProductCatalogService>();
 
             _inner.ConfigureServices(services);
         }

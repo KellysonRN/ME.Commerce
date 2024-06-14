@@ -1,20 +1,14 @@
+using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ME.Commerce.Core.Features.ProductListing.Contracts;
 using ME.Commerce.Core.Features.ProductListing.Models;
 
 namespace ME.Commerce.Tests.ProductCatalog
 {
-    public class FakeProductRepository : IProductRepository
+    public class FakeProductCatalogService : IProductCatalogService
     {
         private readonly ConcurrentDictionary<int, Product> _products = new();
-
-        public Task<List<Product>> GetAllProductsAsync()
-        {
-            return Task.FromResult(_products.Values.ToList());
-        }
 
         public Task<Product> GetProductAsync(int productId)
         {

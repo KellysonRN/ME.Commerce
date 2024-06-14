@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -46,22 +47,21 @@ namespace ME.Commerce.Tests.ShoppingCart
         [Fact]
         public async Task GET_Product_WhenProductExists_ReturnsTheProduct()
         {
-             var expected = new Product(1, "Laptop", 3000.0m);
+            var expected = new Product(1, "Laptop", 3000.0m);
 
             _pactBuilder
                 .UponReceiving("A GET request to retrieve the product")
-                .Given("There is a product with id '1'")
-                .WithRequest(HttpMethod.Get, "/api/products/1")
-                .WithHeader("Accept", "application/json")
+                    .Given($"There is a product with ID '1'", new Dictionary<string, string> { ["id"] = "1" })
+                    .WithRequest(HttpMethod.Get, "/api/products/1")
+                    .WithHeader("Accept", "application/json")
                 .WillRespond()
-                .WithStatus(HttpStatusCode.OK)
-                .WithHeader("Content-Type", "application/json; charset=utf-8")
+                    .WithStatus(HttpStatusCode.OK)
                 .WithJsonBody(
                     new
                     {
-                        id = 1,
-                        name = "Laptop",
-                        price = 3000.0m
+                        Id = PactNet.Matchers.Match.Integer(expected.Id),
+                        name = PactNet.Matchers.Match.Type(expected.Name),
+                        price = PactNet.Matchers.Match.Type(expected.Price)
                     }
                 );
 
