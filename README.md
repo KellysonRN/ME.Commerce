@@ -1,6 +1,6 @@
 # ME.Commerce Application
 
-This is an example e-commerce application showcasing the vertical slice architecture. The application is designed to demonstrate a modular and scalable approach to building software systems.
+This is a sample e-commerce application that illustrates the vertical slice architecture. It is designed to showcase a modular and scalable approach to building software systems.
 
 ## Key features
 - Pact (Contract tests)
